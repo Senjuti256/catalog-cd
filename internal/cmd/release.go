@@ -70,12 +70,12 @@ func runRelease(_ context.Context, cfg *config.Config, args []string, o releaseO
 
 		for _, f := range files {
 			fmt.Fprintf(cfg.Stream.Err, "# Loading resource file: %q\n", f)
-			taskname := filepath.Base(filepath.Dir(f))
+			resourcename := filepath.Base(filepath.Dir(f))
 			resourceType, err := resource.GetResourceType(f)
 			if err != nil {
 				return err
 			}
-			resourceFolder := filepath.Join(o.output, strings.ToLower(resourceType)+"s", taskname)
+			resourceFolder := filepath.Join(o.output, strings.ToLower(resourceType)+"s", resourcename)
 			if err := os.MkdirAll(resourceFolder, os.ModePerm); err != nil {
 				return err
 			}
